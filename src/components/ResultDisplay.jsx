@@ -1,5 +1,6 @@
 import React from "react";
 
+// Category styles for UI
 const categoryStyles = {
   fashion: "bg-pink-100 text-pink-800 border-pink-300",
   electronics: "bg-blue-100 text-blue-800 border-blue-300",
@@ -9,7 +10,11 @@ const categoryStyles = {
 const ResultDisplay = ({ imagePath, category = 'unknown', metadata }) => {
   if (!metadata) return null;
 
-  const fullImageUrl = imagePath ? `http://localhost:8000/${imagePath}` : null;
+  // Use the production API URL instead of localhost
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000"; // Fallback to localhost for development
+  const fullImageUrl = imagePath ? `${API_BASE_URL}/${imagePath}` : null;
+
+  // Get the category style
   const categoryStyle = categoryStyles[category] || categoryStyles.unknown;
 
   return (

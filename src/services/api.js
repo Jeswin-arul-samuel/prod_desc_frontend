@@ -1,4 +1,4 @@
-const API_BASE_URL = "https://prod-desc-bck.up.railway.app";
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8000";
 
 export async function uploadFile(file) {
   const formData = new FormData();
@@ -23,7 +23,7 @@ export const generateMetadata = async (imagePath, category) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ image_path: imagePath, category }), 
+    body: JSON.stringify({ image_path: imagePath, category }), // ✅ this is correct
   });
 
   const data = await res.json();
@@ -35,4 +35,3 @@ export const generateMetadata = async (imagePath, category) => {
 
   return data;
 };
-
